@@ -23,7 +23,7 @@ namespace ApiPrueba.Controllers
         // GET: api/Razas
         [HttpGet]
         public async Task<ActionResult<ApiResult<List<Raza>>>> GetRaza()
-        {
+        { 
             try
 
             {
