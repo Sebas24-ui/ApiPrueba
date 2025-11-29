@@ -12,9 +12,9 @@ using Prueba_Clases;
         {
         }
 
-        public DbSet<Prueba_Clases.Raza> Razas { get; set; } = default!;
+        public DbSet<Raza> Razas { get; set; } = default!;
 
-public DbSet<Prueba_Clases.Especie> Especies { get; set; } = default!;
+public DbSet<Especie> Especies { get; set; } = default!;
 
-public DbSet<Prueba_Clases.Animal> Animals { get; set; } = default!;
-    }    //efsdfsdfsdf ewed
+public DbSet<Animal> Animals { get; set; } = default!;
+    }    
