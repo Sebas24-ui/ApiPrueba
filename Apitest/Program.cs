@@ -26,15 +26,15 @@
             json = response.Content.ReadAsStringAsync().Result;
             //Deserializar la respuesta
             var especieCreada = Newtonsoft.Json.JsonConvert.DeserializeObject<Prueba_Clases.ApiResult<Prueba_Clases.Especie>>(json);
-            //Actulizacion de datos
-            especieCreada.Data.NombreEspecie = "xyz Actuzalido";
-            jsonNuevaEspecie = Newtonsoft.Json.JsonConvert.SerializeObject(especieCreada.Data);
+            //Actulizacion de datos 
+            especieCreada.Data.NombreEspecie = "xyz Actuzalido"; 
+            jsonNuevaEspecie = Newtonsoft.Json.JsonConvert.SerializeObject(especieCreada.Data);    
             content = new StringContent(jsonNuevaEspecie, System.Text.Encoding.UTF8, "application/json");
             response = httpClient.PutAsync($"{rutaEspecies}/{especieCreada.Data.Id}", content).Result;
             json = response.Content.ReadAsStringAsync().Result;
             var especieActulizada = Newtonsoft.Json.JsonConvert.DeserializeObject<Prueba_Clases.ApiResult<Prueba_Clases.Especie>>(json);
             //Eliminacion de datos
-            response = httpClient.DeleteAsync($"{rutaEspecies}/{especieCreada.Data.Id}").Result;
+            response = httpClient.DeleteAsync($"{rutaEspecies}/{especieCreada.Data.Id}").Result; 
             json = response.Content.ReadAsStringAsync().Result;
             var especieEliminada = Newtonsoft.Json.JsonConvert.DeserializeObject<Prueba_Clases.ApiResult<Prueba_Clases.Especie>>(json);
 

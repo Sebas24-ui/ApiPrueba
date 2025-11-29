@@ -17,4 +17,4 @@ using Prueba_Clases;
 public DbSet<Prueba_Clases.Especie> Especies { get; set; } = default!;
 
 public DbSet<Prueba_Clases.Animal> Animals { get; set; } = default!;
-    }
+    }    //efsdfsdfsdf ewed
