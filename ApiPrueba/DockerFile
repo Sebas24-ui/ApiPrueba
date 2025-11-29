@@ -15,7 +15,7 @@ RUN dotnet publish "ApiPrueba/ApiPrueba.csproj" -c Release -o /app/publish --no-
 # STAGE 2: EJECUCIÓN (FINAL)
 # Usamos la imagen ASP.NET (más ligera) para ejecutar.
 # ====================================================================
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final 
 WORKDIR /app
 
 # Copia los archivos publicados del Stage 1
