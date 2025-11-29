@@ -1,28 +1,18 @@
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+WORKDIR /app
+EXPOSE 10000
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-
-# Copia los archivos de proyecto (.csproj) y restáuralos
-# ATENCIÓN: Solo se menciona ApiPrueba.csproj, no la carpeta
-COPY ["ApiPrueba.csproj", "./"] 
+COPY ["ApiPrueba.csproj", "./"]
 RUN dotnet restore "ApiPrueba.csproj"
+COPY . .
+RUN dotnet build "ApiPrueba.csproj" -c Release -o /app/build
 
-# Copia el resto del código
-COPY . . 
+FROM build AS publish
+RUN dotnet publish "ApiPrueba.csproj" -c Release -o /app/publish
 
-# Compila y publica la aplicación. Salida en /app/publish
-RUN dotnet publish "ApiPrueba.csproj" -c Release -o /app/publish --no-restore
-
-# ====================================================================
-# STAGE 2: FINAL (Ejecución)
-# ====================================================================
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+FROM base AS final
 WORKDIR /app
-
-# Copia los archivos publicados del Stage 1
-COPY --from=build /app/publish .
-
-# Define el puerto que usa ASP.NET Core
-EXPOSE 80
-
-# Comando para iniciar la aplicación (DLL debe estar en la raíz del WORKDIR)
-ENTRYPOINT ["dotnet", "ApiPrueba.dll"]
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "ApiPrueba.dll"] 
