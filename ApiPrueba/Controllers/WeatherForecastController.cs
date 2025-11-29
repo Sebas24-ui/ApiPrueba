@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Prueba_Clases;
 
 namespace ApiPrueba.Controllers;
 
