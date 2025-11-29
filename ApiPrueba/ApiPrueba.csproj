@@ -28,9 +28,12 @@
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
 
-	<ItemGroup>
-		    <ProjectReference Include="..\Prueba_Clases\Prueba_Clases.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Prueba_Clases\Prueba_Clases.csproj" />
+<ItemGroup>
+    <ProjectReference Include="..\Prueba_Clases\Prueba_Clases.csproj" />
+  </ItemGroup>		    <ProjectReference Include="..\Apitest\Apitest.csproj" /><ProjectReference Include="..\Prueba_Clases\Prueba_Clases.csproj" />
+
 
   <ItemGroup>
     <Folder Include="Migrations\" />
