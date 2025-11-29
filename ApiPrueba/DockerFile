@@ -1,18 +1,18 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-WORKDIR /app
-EXPOSE 10000
-
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["ApiPrueba.csproj", "./"]
-RUN dotnet restore "ApiPrueba.csproj"
-COPY . .
-RUN dotnet build "ApiPrueba.csproj" -c Release -o /app/build
 
-FROM build AS publish
-RUN dotnet publish "ApiPrueba.csproj" -c Release -o /app/publish
+# Copia la solución y todos los archivos de proyecto
+COPY . . 
 
-FROM base AS final
+# Restaura las dependencias de toda la solución
+RUN dotnet restore
+
+# Publica el proyecto principal (ApiPrueba)
+RUN dotnet publish "ApiPrueba/ApiPrueba.csproj" -c Release -o /app/publish --no-restore
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ApiPrueba.dll"] 
+COPY --from=build /app/publish .
+
+EXPOSE 80
+ENTRYPOINT ["dotnet", "ApiPrueba.dll"]
